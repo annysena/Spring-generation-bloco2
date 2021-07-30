@@ -32,24 +32,19 @@ public class Postagem {
 	@Size(min = 10, max = 1000, message = "O atributo texto deve conter no mínimo 10 e no máximo 500 caracteres")
 	private String texto; // varchar
 
-	/**
-	 * /@Temporal: Indica se o atributo receberá uma data ou um Timestamp (Data e hora do sistema)
-	 * 
-	 * System.currentTimeMillis(): insere os milisegundos na hora
-	 * 
-	 */
+	//@Temporal: Indica se o atributo receberá uma data ou um Timestamp (Data e hora do sistema)
+	// System.currentTimeMillis(): insere os milisegundos na hora
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data = new java.sql.Date(System.currentTimeMillis()); // Date Timestamp()
 	
-	@ManyToOne
-	@JsonIgnoreProperties("postagem")
-	private Tema tema;
+	@ManyToOne // indica que a classe Postagem possui um relacionamento muitos para um com a classe Tema
+	@JsonIgnoreProperties("postagem") // faz com que não haja um loop, ou seja, uma recursividade infinita
+	private Tema tema; // objeto Tema (chave estrangeira) da classe Postagem na relação com a classe Tema e exibe o tema da postagem
 
-	/**
-	 * 
-	 * Métodos Get e Set
-	 * 
-	 */	
+	
+	 //Métodos Get e Set
+	 
 	public long getId() {
 		return id;
 	}
