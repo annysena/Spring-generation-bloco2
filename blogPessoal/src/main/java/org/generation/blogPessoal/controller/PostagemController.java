@@ -18,33 +18,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 
- * /@RestController: Annotation (Anotação), que indica que a Classe é uma RestController,
+ * 1 -> @RestController: Annotation (Anotação), que indica que a Classe é uma RestController,
  * ou seja, é responsável por responder às requisições http enviadas para um endpoint
  * (endereço) definido na anotação @RequestMapping
  * 
- * @RequestMapping("/postagens"): Annotation (Anotação), que indica o endpoint (endereço) 
+ * 2 -> @RequestMapping("/postagens"): Annotation (Anotação), que indica o endpoint (endereço) 
  * que a controladora responderá as requisições 
  * 
- * @CrossOrigin("*"): Annotation (Anotação), que indica que a classe controladora permitirá o 
+ * 3.1 -> @CrossOrigin("*"): Annotation (Anotação), que indica que a classe controladora permitirá o 
  * recebimento de requisições realizadas de fora do domínio (localhost, em nosso caso) ao qual 
  * ela pertence. Essa anotação é essencial para que o front-end (Angular em nosso caso), tenha
  * acesso à nossa API (O termo técnico é consumir a API)
  * 
  * Para as versões mais recentes do Angular, recomenda-se alterar esta anotação para: 
- * /@CrossOrigin(origins = "*", allowedHeaders = "*") 
+ * 3.2 -> @CrossOrigin(origins = "*", allowedHeaders = "*") 
  * Esta anotação, além de liberar as origens, libera também os cabeçalhos das requisições
- * 
  */
 
-@RestController
-@RequestMapping("/postagens") 
-@CrossOrigin(origins = "*", allowedHeaders = "*") 
+@RestController //1
+@RequestMapping("/postagens") //2
+@CrossOrigin(origins = "*", allowedHeaders = "*") //3
 public class PostagemController {
 	
 	/*
-	 * 
-	 * Injeção de Dependência (@Autowired): Consiste  na  maneira,  ou  seja,  na  implementação 
+	 * Injeção de Dependência (@Autowired): Consiste  na  implementação 
 	 * utilizada pelo  Spring  Framework  de  aplicar  a  Inversão  de  Controle  quando  for 
 	 * necessário.
 	 * 
@@ -53,17 +50,16 @@ public class PostagemController {
 	 * 
 	 * Em nosso exemplo a classe controladora cria um ponto de injeção da interface PostagemRepository, 
 	 * e quando houver a necessidade o Spring Framework irá criar uma instância (objeto) desta interface
-	 * permitindo o uso de todos os métodos (padrão ou personalizados em PostagemRepository)
-	 *  
-	 * */
+	 * permitindo o uso de todos os métodos (padrão ou personalizados em PostagemRepository)  
+	 */
 	
 	@Autowired 
 	private PostagemRepository postagemRepository;
 	
-	/**
+	/*
 	 * Listar todas as Postagens
 	 *  
-	 * /@GetMapping: Annotation (Anotação), que indica que o método abaixo responderá todaas as 
+	 * /@GetMapping: Annotation (Anotação), que indica que o método abaixo responderá todas as 
 	 * requisições do tipo GET que forem enviadas no endpoint /postagens
 	 * 
 	 * O Método getAll() será do tipo ResponseEntity porque ele responderá a requisição (Request),

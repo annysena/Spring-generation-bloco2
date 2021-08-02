@@ -17,11 +17,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "tb_temas")
 public class Tema {
 
-    @Id	
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id	// primary key
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // auto_incremento
 	private long id;
 	
-	@NotNull(message = "O atributo Descrição deve ser obrigatório")
+	@NotNull(message = "O atributo Descrição deve ser obrigatório") // não aceita nulo
 	private String descricao;
 	
 	/**

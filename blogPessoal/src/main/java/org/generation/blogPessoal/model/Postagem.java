@@ -16,7 +16,7 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity //Create Table
-@Table(name = "tb_postagens") // tb_postagens(
+@Table(name = "tb_postagens") // nome da tabela
 
 public class Postagem {
 	
@@ -25,7 +25,7 @@ public class Postagem {
 	private long id; // bigint
 
 	@NotNull(message = "O atributo título é Obrigatório!") // Não pode ser nulo
-	@Size(min = 5, max = 100, message = "O atributo título deve conter no mínimo 05 e no máximo 100 caracteres")
+	@Size(min = 5, max = 100, message = "O atributo título deve conter no mínimo 05 e no máximo 100 caracteres") //máx e min de caracteres
 	private String titulo; // varchar
 
 	@NotNull(message = "O atributo texto é Obrigatório!")
@@ -34,7 +34,6 @@ public class Postagem {
 
 	//@Temporal: Indica se o atributo receberá uma data ou um Timestamp (Data e hora do sistema)
 	// System.currentTimeMillis(): insere os milisegundos na hora
-	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data = new java.sql.Date(System.currentTimeMillis()); // Date Timestamp()
 	
