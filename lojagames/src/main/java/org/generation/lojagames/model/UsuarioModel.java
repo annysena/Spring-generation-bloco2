@@ -1,4 +1,4 @@
-package org.generation.blogPessoal.model;
+package org.generation.lojagames.model;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "tb_usuarios")
-public class Usuario {
+public class UsuarioModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,13 +39,13 @@ public class Usuario {
 	@Size(min = 5)
 	private String senha;
 
-	@Column(name = "dt_nascimento")
+	@Column(name = "data_nascimento") // Renomeia o atributo no banco de dados
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataNascimento;
 
-	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE) // REMOVE -> só irá propagar se houver o remove
 	@JsonIgnoreProperties("usuario")
-	private List<Postagem> postagem;
+	private List<ProdutoModel> produto;
 
 	public long getId() {
 		return id;
@@ -87,12 +87,12 @@ public class Usuario {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public List<Postagem> getPostagem() {
-		return postagem;
+	public List<ProdutoModel> getProduto() {
+		return produto;
 	}
 
-	public void setPostagem(List<Postagem> postagem) {
-		this.postagem = postagem;
+	public void setProduto(List<ProdutoModel> produto) {
+		this.produto = produto;
 	}
 
 }
