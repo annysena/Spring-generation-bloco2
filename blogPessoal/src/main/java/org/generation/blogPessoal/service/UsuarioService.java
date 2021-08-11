@@ -21,7 +21,7 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
-	public Optional<Usuario> cadastrarUsuario(Usuario usuario) {
+	public Usuario cadastrarUsuario(Usuario usuario) {
 
 		if (usuarioRepository.findByUsuario(usuario.getUsuario()).isPresent())
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário já existe!", null);
@@ -36,12 +36,20 @@ public class UsuarioService {
 		String senhaEncoder = encoder.encode(usuario.getSenha());
 		usuario.setSenha(senhaEncoder);
 
-		return Optional.of(usuarioRepository.save(usuario));
+		return usuarioRepository.save(usuario);
 	}
 
 	public Optional<Usuario> atualizarUsuario(Usuario usuario) {
 
 		if (usuarioRepository.findById(usuario.getId()).isPresent()) {
+
+			Optional<Usuario> buscaUsuario = usuarioRepository.findByUsuario(usuario.getUsuario());
+
+			if (buscaUsuario.isPresent()) {
+
+				if (buscaUsuario.get().getId() != usuario.getId())
+					throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário já existe!", null);
+			}
 
 			int idade = Period.between(usuario.getDataNascimento(), LocalDate.now()).getYears();
 
